@@ -1,0 +1,33 @@
+.app-container{
+  display: flex;
+}
+.content{
+  width: 100%;
+}
+.sidebar{
+  height: 100vh;
+}
+.my-row{
+  margin-top: 35px !important;
+}
+.post-card{
+  margin: 15px;
+}
+.tags{
+  margin: 3px;
+}
+.delete-btn{
+  float: right;
+  background-color: rgb(33, 35, 35) !important;
+  color:white !important;
+  margin: 5px 0 0 0 ;
+  position: absolute;
+  float: right;
+  right: 0;
+  bottom: 4px ;
+}
+.create-post-form{
+width: 75%;
+margin-top: 5%;
+margin-left: 10%;
+}

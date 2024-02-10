@@ -1,0 +1,325 @@
+React Importand Commands:
+npm create vite@latest->give a name to project->choose react->npm install or npm install -f -> npm dev
+
+
+
+Install bootstrap:
+npm i bootstrap@5.3.2
+include in main.js 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+<React.Fragment>
+	<h1></h1>
+	<ul>
+		<li></li>
+		<li></li>
+	</ul>
+</React.Fragment>  or simply <> and </>
+allows to add a single container instead of div
+div creates an extra node in DOM hence use <> </> fragment.
+
+inline css can be applied as below:
+<div className="d-flex" style={{width: '18rem',height:'100rem'}}>
+
+props: props are the parameters that the component takes
+props(properties) are read-only by default
+u can use as below:
+// const Item = (props) => {
+//    
+//   return <li>{props.foodItem}</li>;
+// };
+
+and as below too(using array destructuring):
+const Item = ({item}) => {
+   
+  return <li>{item}</li>;
+};
+
+array destructuring:
+let {foodItem} = props;
+it will extract foodItem from props object;
+
+ <ErrorMsg items={foodItems}></ErrorMsg>
+ you are supposed to accept the parameters(props) with 
+ same as name as the name you pass while calling component.(i.e here items not foodItems)
+
+ css modules:
+ css modules are the different css file than app.css
+ you can create the css file same as component name.modul.css
+ which will allow you not to have conflicts between the classnames with other components
+ it will automatically add the extra content to  classnames(generates unique classnames) such as my-item will be my-item-9y0h;
+-> it provides localized classNames to avoid global conflicts
+-> it allows to create component specific classes
+-> which is really useful to remove unused css
+
+you need to import that css module file as below
+import css from './item.module.css';
+
+here you can keep any name instead of css
+ i.e
+ you can assign the classnames that are defined in module css file
+ <li className={`${css["my-item"]}`}>{foodItem}</li>;
+
+
+ children is a special prop for passing elements into components
+ common in a layout or container components
+ accessed with props.children
+ i.e
+ const Container = (props)=>{
+    return <div className={style.container}>{props.children}</div>
+}
+
+
+Events:
+Events use camelCase  i.e onClick
+React has its own events not the browser specific events
+avoid inline arrow functions in jsx to handle events
+
+i.e
+<button  onClick={(event)=>handleBuyBtnClick(foodItem,event)}>Buy</button>
+
+
+
+useState:
+
+useState is a Hook in React that allows functional components to have state variables.
+It is used to declare state variables in functional components.
+Syntax:
+
+const [state, setState] = useState(initialState);
+state: The current state value.
+setState: A function to update the state.
+initialState: The initial value of the state.
+Declaring State:
+
+Use useState in the body of a functional component.
+The argument to useState is the initial state value.
+Updating State:
+
+State updates are asynchronous in React.
+setState can be called with a new value or a function that computes a new value based on the previous state.
+Functional Updates:
+
+When the new state is computed based on the previous state, it's recommended to use the functional update form of setState.
+useState re-renders a component and it's child components which uses that state
+
+setState(543);
+
+Props:
+
+Source of Data: Props (short for properties) are a mechanism for passing data from a parent component to a child component.
+Immutability: Props are immutable, meaning they cannot be modified within the child component. They are read-only.
+Communication: Props enable communication between parent and child components. Data flows from parent to child through props.
+useState:
+
+Source of Data: useState is a Hook used to declare state variables within a functional component. It provides a way to create and manage state within the component.
+Immutability: State variables declared with useState can be updated using the corresponding updater function, but the updates are asynchronous and follow the principles of immutability.
+Local Component State: useState is used for managing local state within a component. Each component can have its own state independent of other components.
+
+React Icons:
+npm install react-icons --save
+
+use icon name as component-><MdDeleteForever />
+and add import statement for that icons
+import { MdDeleteForever } from "react-icons/md";
+
+/md   /fi these are the group names of icons
+
+React deep understanding and React vs Angular vs Vue:
+check pdf notes from Kg Coding
+
+Add React developer tools chrome extension
+
+
+Forms:
+check pdf notes from Kg Coding
+
+
+useRef:
+
+useRef is used to create mutable object references that persist across renders.
+ It's often used for accessing and interacting with the DOM directly, or for
+  persisting values between renders without causing re-renders.
+When you call useRef(), it returns a mutable object with a .
+current property that can be assigned any value.
+
+Changes to state variables created with useState trigger a re-render of the component.
+Changes to the .current property of a useRef object do not trigger a re-render.
+
+useState is commonly used for managing dynamic data that causes the component
+ to re-render.
+useRef is often used for accessing and interacting with DOM elements, or for
+ storing values that should persist across renders without causing re-renders.
+
+ Spread operator:
+ toDoNameState = useState([11,12,13]);
+ const try = [toDoNameState,100,200]==>will have values as [Array(3),100,200];
+ but we want the elements of array ...current approach stores entire array as an element hence we use 
+ Spread operator it stores separate elements of array as separate element
+ const newItems = [...toDoNameState, 100,200] => will have [11,12,13,100,200];
+
+
+ useState can be asynchronous hence if we use it to access previous value sometime
+ it can produce incorrect values
+ hence use below to access previous(means the latest value)
+ to append new value
+ setToDoItems((currentValue)=>[...currentValue,{ name: toDoName, dueDate: dueDate }]);
+ instead of
+   const newToDoItems = [...ToDoItems, { name: toDoName, dueDate: dueDate }];
+   setToDoItems(newToDoItems);
+
+   //the above thing we should not go for because we are using state directly to
+   access present values,it might not be set immediately
+
+
+   Context API:
+   The Problem
+State should be held by the highest parent component in the stack that requires access to the state.
+
+To illustrate, we have many nested components. The component at the top and bottom of the stack need access to the state.
+
+To do this without Context, we will need to pass the state as "props" through each nested component. This is called "prop drilling".
+
+UseContext Hook:
+allows developers to easily share data across multiple components without 
+the need for prop drilling.
+Since the state is managed at the top level of your component tree,
+any component that needs access to the state can use the useContext hook 
+to retrieve the state data and update it as required.
+ex:
+import { createContext } from "react";
+
+export const ToDoItemStoreContext = createContext({
+    ToDoItems : [], //here u can define the properties that context can have ..mainly this approach of declaration of props is used to get suggestions
+    AddNewItem : ()=>{},
+    DeleteItem : () =>{}
+});
+
+
+how to provide the values and allow components to use the context:
+<ToDoItemStoreContext.Provider value={{ToDoItems:ToDoItems,AddNewItem:addNewToDo,DeleteItem:DeleteToDoItem}}>
+		 <AppName />
+        <AddToDoFormRef />
+</ToDoItemStoreContext.Provider>
+
+
+
+how to access the values of context inside nested components:
+const {ToDoItems} = useContext(ToDoItemStoreContext); 
+//ToDoItemStoreContext is the name of functio  inside which u have created the context
+
+
+useReducer:
+The reducer function takes two arguments: the current state and an action.
+It returns the new state based on the action type.
+The reducer should be a pure function without side effects.
+
+Actions are plain JavaScript objects with a type property that indicates the action's purpose.
+Additional data can be included in the payload property of the action.
+Example: { type: 'INCREMENT', payload: 5 }
+
+State updates are determined by the logic inside the reducer.
+Always return a new state object from the reducer to trigger re-renders.
+Use the spread operator (...) to create new objects or arrays when updating state.
+
+useReducer can be more efficient than multiple useState calls, especially when dealing with complex state updates.
+useReducer is commonly used in combination with Context API for global state management.
+Syntax:
+
+const [state, dispatch] = useReducer(reducer, initialState);
+state: Represents the current state.
+dispatch: A function used to dispatch actions to trigger state changes.
+reducer: A function that specifies how the state should be updated in response to actions.
+initialState: The initial state of the component.
+
+
+the flow:
+1.use useState when there is less complex state updates and not that deep nested components
+2.move the state updation methods from App component to Context so that nested components can access directly 
+from context instead of passing them from App to child
+3.use useReducer when there are multiple sub-components to update the state and you want them to only provide
+what has been changes instead of changing entire state....your reducer method will do it for you.(these code also should be inside context);
+
+useEffect:
+
+
+you can use states to know whether the data is fetched from server or not 
+if not then fetch and set the state to true 
+and  if already fetched than do nothing
+
+this code should be on first lines of component before return;
+
+
+but if you want to perform such tasks which allows to run whenver the app is loaded first time  or the variable is changes
+you can use useEffect
+
+if you provide no second argument to useEffect, it wil run infinitely and (i.e fetch data from server)
+react will not re render the  component of list of data as it will fetch the data 
+it will find the key property which is id as same as previous data 
+it will not find any difference between the newly loaded data and virtual dom's data
+hence it will not re render
+
+The useEffect hook in React is used to handle the side effects in React
+such as fetching data, and updating DOM
+
+To run an effect infinitely provide no second argument
+To run an effect only once (on initial rende or on mount), provide an empty dependency array ([]).
+To run the effect on initial render and whenever a specific variable changes, include it in the dependency array.
+You can use multiple useEffect calls to separate concerns and make the code more modular.
+
+if you return something from useEffect it will called at the time of component clean up or 
+killing (i.e you switch from one component to another)
+
+how to abort api cal:
+create object of type 
+const controller =new  AbortController();
+      const {signal} = controller;
+pass signal variable as a second parameter to fetch api fetch('url',{signal})
+
+
+
+and at the time of useEffect clean up function
+abort using controller.abort();
+
+try to remove all the console statements once you complete work on component
+to optimize perfomance as it needs to go to console to print .
+
+you get console statements printed twice because of
+<React.StrictMode>
+    <App />
+  </React.StrictMode>
+
+it renders components twice...hence consoles are printed twice
+renders once and removes from memory and then again renders
+<React.StrictMode> is only used in development not in production so remove it 
+before going to production environment
+
+useCallback:
+`useCallback` is a React Hook that memoizes (caches) a callback function,
+ returning the memoized version. It helps optimize performance by preventing
+ unnecessary re-creation of callback functions, particularly in scenarios
+ where the callback dependencies remain unchanged between renders. 
+ It's useful when passing callbacks to child components to avoid 
+ unnecessary re-renders.
+
+ useMemo:
+ `useMemo` is a React Hook that memoizes (caches) the result of a 
+ function, returning the cached result when the dependencies remain unchanged.
+  It's used to optimize performance by avoiding redundant calculations 
+ or computations during re-renders when the inputs haven't changed.
+
+ const arr=[1,2,3,4];
+ const doubled = useMemo( ()=>arr.length*2,[arr])
+ use: Intensive calculations that should not run on every render
+
+
+ optimization:
+ i was initially fetching posts from server on post-list component on useEffect
+ so whenever the postlist is re-rendered the fetch is called again.so if you add post 
+ in postlist state you will lose it because postlist is again filled with fetch api response
+
+ so call fetch api  inside a context provider useEffect
+ so provider is rendered only once so initail posts will be fetched once
+ and if you add posts to postlist state you will be able to see on postlist 
+ component as it is not fetched again from server

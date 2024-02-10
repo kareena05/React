@@ -1,0 +1,10 @@
+.heading{
+    color:blueviolet;
+}
+.calculatorContainer {
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin: auto;
+  width: 65%;
+}
+

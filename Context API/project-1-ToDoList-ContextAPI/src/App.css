@@ -1,0 +1,27 @@
+h1{
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+input{
+    width: 100%;
+}
+.todo-container{
+    text-align: left;
+}
+.my-row{
+    margin:4px 9px 10px 2px;
+    justify-content: center;
+}
+.my-button{
+   min-width: 80px;
+}
+.item-row{
+    margin-left: 10px;
+}
+.enjoyMsg{
+    font-size: 35px;
+    color: green;
+    margin-top: 50px;
+    text-align: center;
+}
