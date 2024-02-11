@@ -80,7 +80,8 @@ i.e
 <button  onClick={(event)=>handleBuyBtnClick(foodItem,event)}>Buy</button>
 
 
-
+Hooks:
+hooks are called/used in component only and not inside any function or something
 useState:
 
 useState is a Hook in React that allows functional components to have state variables.
@@ -323,3 +324,6 @@ useCallback:
  so provider is rendered only once so initail posts will be fetched once
  and if you add posts to postlist state you will be able to see on postlist 
  component as it is not fetched again from server
+
+
+ 
