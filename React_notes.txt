@@ -224,7 +224,8 @@ State updates are determined by the logic inside the reducer.
 Always return a new state object from the reducer to trigger re-renders.
 Use the spread operator (...) to create new objects or arrays when updating state.
 
-useReducer can be more efficient than multiple useState calls, especially when dealing with complex state updates.
+useReducer can be more efficient than multiple useState calls, especially when dealing with complex state
+updates.
 useReducer is commonly used in combination with Context API for global state management.
 Syntax:
 
@@ -326,4 +327,43 @@ useCallback:
  component as it is not fetched again from server
 
 
+ React Router:
  
+  install react-router-dom
+ command :npm install react-route-dom 
+ create object using createBrowserRouter in main.jsx 
+ why main.jsx and not App.jsx? APP.jsx is the first component to be rendered but still it is getting rendered by main.jsx
+ const router = createBrowserRouter([
+  { path: "/",element: <App /> },
+   { path: "/create",element: <CreatePost /> },
+])
+
+//above Example creates two routes one for app and one for create post \
+if you change url to localhost:5123/create you will see create post component but
+you will not see layout of sidebar and headers if you want the layout to be included in all 
+routes you can specify them inside children property as below 
+ const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <PostList /> },
+      { path: "/create", element: <CreatePost />,action:submitFormData },
+    ],
+  },
+])
+
+<a href="/create">go to create</a>
+you will be redirected to create post component but
+the page will be refreshed
+this is not our objective, our objective is to create a single page application
+hence use <Link to="/create">go to create</Link> from react-router-dom
+using <Link> the page will not be reloaded
+
+if you want to manually redirect to the specific route you can use navigate() Hook from react-router-dom
+const navigate = useNavigate();
+ navigate("/")->redirect to home
+above can be used inside component as it is a Hook
+
+to redirect from functions 
+use Redirect("/") from react-router-dom

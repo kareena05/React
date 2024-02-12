@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { PostListContext } from "../store/post-list-store";
+// import { useContext } from "react";
+// import { PostListContext } from "../store/post-list-store";
+// eslint-disable-next-line no-unused-vars
 import { Form, redirect, useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const { addPost } = useContext(PostListContext);
-  const navigate = useNavigate();
+  // const { addPost } = useContext(PostListContext);
+  // const navigate = useNavigate();
  
 
   
