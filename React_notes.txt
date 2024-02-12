@@ -367,3 +367,11 @@ above can be used inside component as it is a Hook
 
 to redirect from functions 
 use Redirect("/") from react-router-dom
+
+
+Redux:
+
+create node project
+npm init -y 
+install Redux
+npm install redux
