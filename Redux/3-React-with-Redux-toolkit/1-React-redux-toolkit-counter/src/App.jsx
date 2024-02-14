@@ -10,7 +10,7 @@ import DisplayCounter from "./components/DisplayCounter";
 function App() {
   const privacy = useSelector((state) => state.privacy);
 
-
+console.log(privacy+"privacy");
 
  
   return (

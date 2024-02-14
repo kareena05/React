@@ -375,3 +375,59 @@ create node project
 npm init -y 
 install Redux
 npm install redux
+
+
+if you reassign a value to existing key in object it will override the value
+with second value
+return {...store,counter:store.counter+1}
+
+npm install redux
+npm install react-Redux
+
+React-Redux Overview:
+
+React-Redux is a library that provides a bridge between React, a JavaScript library for building user interfaces, and Redux, a predictable state container for JavaScript applications. It helps manage the state of a React application in a more organized and scalable way.
+
+Key Concepts:
+
+Store: Redux stores the entire state of your application in a single JavaScript object. This state is read-only, and the only way to modify it is by dispatching actions.
+
+Actions: Actions are plain JavaScript objects that describe changes in the application state. They must have a type property indicating the type of action being performed.
+
+Reducers: Reducers are pure functions that take the current state and an action as arguments and return a new state. They specify how the state changes in response to an action.
+
+Dispatch: Dispatch is a method provided by the Redux store. It is used to send actions to the store. When an action is dispatched, the store calls the reducer, which in turn updates the state.
+1.Setup Redux Store:
+create a store in js file store.js or anything
+Use createStore with the reducer to create the Redux store.
+const counterStore = createStore(counterReducer);
+
+create reducer functionconst counterReducer = (store=INITIAL_VALUE,action)=>{
+    let newStore = {...store};
+    if(action.type=="INCREMENT"){
+        newStore.counter = store.counter+1;
+    }
+
+    return newStore;
+}
+you can have default value for store by assigning it in parameter
+store is immutable ,so you can not change the store's value
+
+2.Connect React Component
+Use Provider from react-redux to wrap the root component, providing access to the Redux store.
+<Provider store={counterStore}>
+    <App />
+</Provider>
+
+3.Accessing State and Dispatch:
+    const counter = useSelector((state) => state.counter);
+
+useSelector subscribes the store and re-renders whoever component uses it when the
+state is updated
+    const dispatch = useDispatch();
+    dispatch({ type: "ADD",payload:{number:inputRef.current.value} });
+
+
+
+Redux ToolKit:
+npm install @reduxjs/toolkit
