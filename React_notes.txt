@@ -431,3 +431,65 @@ state is updated
 
 Redux ToolKit:
 npm install @reduxjs/toolkit
+
+create store using configureStore method in a separate js file
+
+const MainStore = configureStore({
+  reducer: {
+    counter: counterSlicer.reducer,
+    privacy: privacySlicer.reducer,
+  },
+});
+
+create slices: in the same file of store or separate files for each slice.
+
+slices are created to encapsulate the logic related to a specific slice of your Redux state(i.e different states different slices ...counterslice will have all the actions and state management for counter which allows not all the logic and all states to be managed in a single file and only a part of store to be accessed and managed instead of entire store ). A slice typically represents a portion of your application's state and includes the corresponding reducer functions, action creators, and selectors.
+
+
+const counterSlicer = createSlice({
+    name: "counter",
+    initialState: { counterVal: 0 },
+    reducers: {
+      increment: (state) => {
+        state.counterVal++;
+      },
+      add: (state, action) => {
+        state.counterVal += Number(action.payload.num);
+      },
+     
+    },
+  });
+
+  use createSlice and provide the values for it's properties
+  such as name(not used at all),reducers to provide all the action methods to perform specific tasks,initialState to provide initial or default value for state
+
+  in reducres, the action method takes 2 arguments -> the current state and action or payload
+
+
+  export the actions of slice and also export the slice itself if you have created separate file for slice
+  export const counterActions = counterSlicer.actions;
+  export default counterSlicer;
+
+  provide the reducers of  these slices to store
+  
+const MainStore = configureStore({
+  reducer: {
+    counter: counterSlicer.reducer,  //this object key names are used to access
+    privacy: privacySlicer.reducer,  //this object key names are used to access
+  },
+});
+
+
+use the values of state:
+
+  const privacy = useSelector((state) => state.privacy);
+  //privacy is the name :->  go to //this object key names are used to access
+
+  dispatch actions:
+   const dispatch = useDispatch();
+   dispatch(counterActions.increment()); //import counterActions , as we have exported it 
+
+
+   //dispatch with payload 
+   dispatch(counterActions.add({ num: inputRef.current.value }));
+   or simply inputRef.current.value
